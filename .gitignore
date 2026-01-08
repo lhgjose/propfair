@@ -1,1 +1,49 @@
+# Dependencies
+node_modules/
+.pnpm-store/
+
+# Build outputs
+.next/
+dist/
+build/
+*.egg-info/
+__pycache__/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# Environment
+.env
+.env.local
+.env.*.local
+*.env
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Python virtual env
+.venv/
+venv/
+
+# Logs
+*.log
+logs/
+
+# Test coverage
+coverage/
+htmlcov/
+.coverage
+
+# Misc
+*.pyc
+*.pyo
+
+# Worktrees
 .worktrees/
