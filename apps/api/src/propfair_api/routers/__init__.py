@@ -1,3 +1,3 @@
-from propfair_api.routers import listings, analysis, auth
+from propfair_api.routers import listings, analysis, auth, favorites
 
-__all__ = ["listings", "analysis", "auth"]
+__all__ = ["listings", "analysis", "auth", "favorites"]

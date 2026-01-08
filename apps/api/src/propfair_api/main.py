@@ -1,5 +1,5 @@
 from fastapi import FastAPI
-from propfair_api.routers import listings, analysis, auth
+from propfair_api.routers import listings, analysis, auth, favorites
 
 app = FastAPI(
     title="PropFair API",
@@ -10,6 +10,7 @@ app = FastAPI(
 app.include_router(listings.router)
 app.include_router(analysis.router)
 app.include_router(auth.router)
+app.include_router(favorites.router)
 
 
 @app.get("/health")
