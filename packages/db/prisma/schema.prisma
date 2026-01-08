@@ -1,0 +1,98 @@
+generator client {
+  provider        = "prisma-client-js"
+  previewFeatures = ["postgresqlExtensions"]
+}
+
+datasource db {
+  provider   = "postgresql"
+  url        = env("DATABASE_URL")
+  extensions = [postgis]
+}
+
+model Listing {
+  id          String   @id @default(cuid())
+  externalId  String   @map("external_id")
+  source      String
+  url         String
+  title       String
+  description String?
+
+  price           Int
+  adminFee        Int?      @map("admin_fee")
+  bedrooms        Int
+  bathrooms       Int
+  parkingSpaces   Int       @map("parking_spaces")
+  area            Float
+  estrato         Int?
+  floor           Int?
+  totalFloors     Int?      @map("total_floors")
+  buildingAge     Int?      @map("building_age")
+  propertyCondition String? @map("property_condition")
+
+  address      String
+  neighborhood String
+  city         String
+  latitude     Float
+  longitude    Float
+
+  images       String[]
+  amenities    String[]
+
+  firstSeenAt  DateTime  @default(now()) @map("first_seen_at")
+  lastSeenAt   DateTime  @default(now()) @map("last_seen_at")
+  isActive     Boolean   @default(true) @map("is_active")
+  contentHash  String    @map("content_hash")
+
+  createdAt    DateTime  @default(now()) @map("created_at")
+  updatedAt    DateTime  @updatedAt @map("updated_at")
+
+  priceHistory  PriceHistory[]
+  favorites     Favorite[]
+
+  @@unique([source, externalId])
+  @@index([city, neighborhood])
+  @@index([price])
+  @@index([bedrooms])
+  @@index([isActive])
+  @@map("listings")
+}
+
+model PriceHistory {
+  id        String   @id @default(cuid())
+  listingId String   @map("listing_id")
+  price     Int
+  adminFee  Int?     @map("admin_fee")
+  recordedAt DateTime @default(now()) @map("recorded_at")
+
+  listing   Listing  @relation(fields: [listingId], references: [id], onDelete: Cascade)
+
+  @@index([listingId, recordedAt])
+  @@map("price_history")
+}
+
+model User {
+  id            String   @id @default(cuid())
+  email         String   @unique
+  passwordHash  String   @map("password_hash")
+  name          String?
+
+  createdAt     DateTime @default(now()) @map("created_at")
+  updatedAt     DateTime @updatedAt @map("updated_at")
+
+  favorites     Favorite[]
+
+  @@map("users")
+}
+
+model Favorite {
+  id        String   @id @default(cuid())
+  userId    String   @map("user_id")
+  listingId String   @map("listing_id")
+  createdAt DateTime @default(now()) @map("created_at")
+
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  listing   Listing  @relation(fields: [listingId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, listingId])
+  @@map("favorites")
+}
