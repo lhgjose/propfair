@@ -1,7 +1,8 @@
 from typing import Optional, List
 from datetime import datetime
-from sqlalchemy import String, Integer, Float, DateTime, Boolean, ARRAY
+from sqlalchemy import String, Integer, Float, DateTime, Boolean, ARRAY, JSON
 from sqlalchemy.orm import DeclarativeBase, Mapped, mapped_column, relationship
+from sqlalchemy.dialects.postgresql import ARRAY as PG_ARRAY
 
 
 class Base(DeclarativeBase):
@@ -48,8 +49,8 @@ class Listing(Base):
     longitude: Mapped[float] = mapped_column(Float)
 
     # Media & amenities
-    images: Mapped[List[str]] = mapped_column(ARRAY(String))
-    amenities: Mapped[List[str]] = mapped_column(ARRAY(String))
+    images: Mapped[List[str]] = mapped_column(JSON)
+    amenities: Mapped[List[str]] = mapped_column(JSON)
 
     # Metadata
     first_seen_at: Mapped[datetime] = mapped_column("first_seen_at", DateTime(timezone=True))
