@@ -1,9 +1,10 @@
+from typing import Optional, List
 from pydantic import BaseModel
 
 
 class FeatureImpact(BaseModel):
     feature: str
-    value: float | None
+    value: Optional[float]
     impact: float
     direction: str
 
@@ -15,4 +16,4 @@ class FairPriceResponse(BaseModel):
     price_difference: int
     price_difference_percent: float
     verdict: str  # "fair", "overpriced", "underpriced"
-    feature_impacts: list[FeatureImpact]
+    feature_impacts: List[FeatureImpact]

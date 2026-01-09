@@ -1,17 +1,18 @@
+from typing import Optional, List
 from pydantic import BaseModel
 from datetime import datetime
 
 
 class ListingBase(BaseModel):
     title: str
-    description: str | None = None
+    description: Optional[str] = None
     price: int
-    admin_fee: int | None = None
+    admin_fee: Optional[int] = None
     bedrooms: int
     bathrooms: int
     parking_spaces: int
     area: float
-    estrato: int | None = None
+    estrato: Optional[int] = None
     address: str
     neighborhood: str
     city: str
@@ -23,7 +24,7 @@ class ListingResponse(ListingBase):
     id: str
     source: str
     url: str
-    images: list[str]
+    images: List[str]
     is_active: bool
     first_seen_at: datetime
     last_seen_at: datetime
@@ -33,21 +34,21 @@ class ListingResponse(ListingBase):
 
 
 class ListingSearchParams(BaseModel):
-    city: str | None = None
-    neighborhood: str | None = None
-    min_price: int | None = None
-    max_price: int | None = None
-    bedrooms: int | None = None
-    bathrooms: int | None = None
-    min_area: float | None = None
-    max_area: float | None = None
-    estrato: int | None = None
+    city: Optional[str] = None
+    neighborhood: Optional[str] = None
+    min_price: Optional[int] = None
+    max_price: Optional[int] = None
+    bedrooms: Optional[int] = None
+    bathrooms: Optional[int] = None
+    min_area: Optional[float] = None
+    max_area: Optional[float] = None
+    estrato: Optional[int] = None
     page: int = 1
     page_size: int = 20
 
 
 class PaginatedListings(BaseModel):
-    items: list[ListingResponse]
+    items: List[ListingResponse]
     total: int
     page: int
     page_size: int

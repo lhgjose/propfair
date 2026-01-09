@@ -11,6 +11,8 @@ __pycache__/
 .pytest_cache/
 .mypy_cache/
 .ruff_cache/
+next-env.d.ts
+*.tsbuildinfo
 
 # Environment
 .env
@@ -44,6 +46,9 @@ htmlcov/
 # Misc
 *.pyc
 *.pyo
+
+# Claude Code memory files (keep root CLAUDE.md)
+**/CLAUDE.md
 
 # Worktrees
 .worktrees/

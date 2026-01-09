@@ -1,10 +1,11 @@
+from typing import Optional
 from pydantic import BaseModel, EmailStr
 
 
 class UserRegister(BaseModel):
     email: EmailStr
     password: str
-    name: str | None = None
+    name: Optional[str] = None
 
 
 class UserLogin(BaseModel):
@@ -21,7 +22,7 @@ class Token(BaseModel):
 class UserResponse(BaseModel):
     id: str
     email: str
-    name: str | None
+    name: Optional[str]
 
     class Config:
         from_attributes = True

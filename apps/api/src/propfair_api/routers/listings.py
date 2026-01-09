@@ -1,3 +1,4 @@
+from typing import Optional
 from fastapi import APIRouter, Depends, Query
 from sqlalchemy.orm import Session
 
@@ -13,15 +14,15 @@ router = APIRouter(prefix="/api/v1/listings", tags=["listings"])
 
 @router.get("", response_model=PaginatedListings)
 async def search_listings(
-    city: str | None = Query(None),
-    neighborhood: str | None = Query(None),
-    min_price: int | None = Query(None),
-    max_price: int | None = Query(None),
-    bedrooms: int | None = Query(None),
-    bathrooms: int | None = Query(None),
-    min_area: float | None = Query(None),
-    max_area: float | None = Query(None),
-    estrato: int | None = Query(None),
+    city: Optional[str] = Query(None),
+    neighborhood: Optional[str] = Query(None),
+    min_price: Optional[int] = Query(None),
+    max_price: Optional[int] = Query(None),
+    bedrooms: Optional[int] = Query(None),
+    bathrooms: Optional[int] = Query(None),
+    min_area: Optional[float] = Query(None),
+    max_area: Optional[float] = Query(None),
+    estrato: Optional[int] = Query(None),
     page: int = Query(1, ge=1),
     page_size: int = Query(20, ge=1, le=100),
     db: Session = Depends(get_db_session),
