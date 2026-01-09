@@ -183,3 +183,20 @@ def test_search_listings_pagination(sample_listings):
     data = response.json()
     assert len(data["items"]) == 2
     assert data["total_pages"] == 2
+
+
+def test_get_listing_by_id(sample_listings):
+    """Test getting a single listing by ID."""
+    response = client.get("/api/v1/listings/listing_1")
+    assert response.status_code == 200
+    data = response.json()
+    assert data["id"] == "listing_1"
+    assert data["title"] == "Apartment in Usaquén"
+    assert data["price"] == 2000000
+
+
+def test_get_listing_not_found():
+    """Test 404 when listing doesn't exist."""
+    response = client.get("/api/v1/listings/nonexistent")
+    assert response.status_code == 404
+    assert response.json()["detail"] == "Listing not found"
