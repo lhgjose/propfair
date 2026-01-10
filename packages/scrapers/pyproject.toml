@@ -2,7 +2,7 @@
 name = "propfair-scrapers"
 version = "0.1.0"
 description = "PropFair Web Scrapers"
-requires-python = ">=3.12"
+requires-python = ">=3.9"
 dependencies = [
     "scrapy>=2.12.0",
     "playwright>=1.49.0",

@@ -167,7 +167,7 @@ touch apps/.gitkeep packages/.gitkeep infra/docker/.gitkeep
 **Step 2: Commit**
 
 ```bash
-git add .
+git add . 
 git commit -m "chore: add apps, packages, infra directories"
 ```
 

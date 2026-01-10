@@ -13,6 +13,8 @@ def test_settings_loads_defaults():
     assert settings.api_port == 8000
 
 
-def test_settings_requires_database_url():
-    with pytest.raises(Exception):
-        Settings(redis_url="redis://localhost:6379", secret_key="test")
+def test_settings_uses_defaults():
+    settings = Settings()
+    assert settings.database_url == "sqlite:///:memory:"
+    assert settings.redis_url == "redis://localhost:6379/0"
+    assert settings.secret_key == "test-secret-key-not-for-production"
